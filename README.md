@@ -1,26 +1,16 @@
 # iot_sensor
 
-###  Flutter使用版本为1.9.1+hotfix.4
+A new Flutter application.
 
-#### main.dart为程序主入口，通过下面的代码来确定入口程序进入哪个组件
+## Getting Started
 
-```dart
-void main() => runApp(DynamicThemeState());
-```
+This project is a starting point for a Flutter application.
 
-#### pojo文件夹下的类用来JSON格式转换，数据传输以Json格式传输
+A few resources to get you started if this is your first Flutter project:
 
-#### DataPages和ChartPage是两个页面，在主页点击对应按钮切换时切换两个页面，详细内容在类的注释中写了
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-其余内容均为Flutter基础知识等内容。
-
-
-
-
-
-# 需要更详细了解，联系QQ：2134123985
-
-
-
-
-
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

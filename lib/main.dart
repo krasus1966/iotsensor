@@ -1,88 +1,93 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:iot_sensor/pages/home_page.dart';
 
-import 'ChartPage.dart';
-import 'DataPages.dart';
-
-void main() => runApp(DynamicThemeState());
-
-class DynamicThemeState extends StatefulWidget {
-  @override
-  _DynamicThemeStateState createState() => _DynamicThemeStateState();
+void main() {
+  runApp(MyApp());
 }
 
-class _DynamicThemeStateState extends State<DynamicThemeState> {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   Brightness _brightness = Brightness.light;
+  IconData _themeIcons = Icons.brightness_2;
+  String _themeTitle = "夜间";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Iot_Sensor",
-      theme: ThemeData(
-        brightness: _brightness,
-      ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-  List<Widget> pages = List<Widget>();
-
-  @override
-  void initState() {
-    //将页面增加到组件列表中
-    pages..add(DataPage())..add(ChartPage());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      //侧边栏，通过右划打开
-      drawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-                accountName: Text("出现问题请联系"),
-                accountEmail: Text("2134123985@qq.com")),
-            ListTile(
-              title: Text("更新 "),
-              leading: Icon(Icons.update),
-              onTap: () {},
+        title: 'Flutter Demo',
+        theme: ThemeData(brightness: _brightness),
+        home: Scaffold(
+          drawer: Drawer(
+              child: Container(
+            child: Column(
+              children: [
+                Expanded(
+                    flex: 4,
+                    child: UserAccountsDrawerHeader(
+                        accountName: Text("出现问题请联系"),
+                        accountEmail: Text("2134123985@qq.com"))),
+                Expanded(
+                    flex: 10,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: <Widget>[
+                        ListTile(
+                          title: Text("更新"),
+                          leading: Icon(Icons.update),
+                          onTap: () {},
+                        ),
+                      ],
+                    )),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                        margin: EdgeInsets.zero,
+                        child: ButtonBar(
+                          alignment: MainAxisAlignment.start,
+                          children: [
+                            MaterialButton(
+                              onPressed: _changeTheme,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6))),
+                                child: Column(
+                                  children: [
+                                    Icon(_themeIcons),
+                                    Text(_themeTitle)
+                                  ],
+                                ),
+                              ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50))),
+                            )
+                          ],
+                        )))
+              ],
             ),
-          ],
-        ),
-      ),
-      //底部按钮组
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        //按钮列表
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            title: Text("实时数据"),
-            icon: Icon(Icons.refresh),
-            backgroundColor: Color.fromRGBO(66, 129, 94, 1),
-          ),
-          BottomNavigationBarItem(
-            title: Text("数据图表"),
-            icon: Icon(Icons.photo_size_select_actual),
-            backgroundColor: Color.fromRGBO(66, 129, 94, 1),
-          ),
-        ],
-      ),
-      // 页面的切换是通过改变_currentIndex的值来实现
-      body: pages[_currentIndex],
-    );
+          )),
+          body: HomePage(),
+        ));
+  }
+
+  _changeTheme() {
+    setState(() {
+      if (_brightness == Brightness.light) {
+        _themeIcons = Icons.wb_sunny;
+        _brightness = Brightness.dark;
+        _themeTitle = "白天";
+      } else {
+        _themeIcons = Icons.brightness_2;
+        _brightness = Brightness.light;
+        _themeTitle = "夜间";
+      }
+    });
   }
 }

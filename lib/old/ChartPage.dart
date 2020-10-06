@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:http/http.dart' as http;
-import 'package:iot_sensor/pojo/ListData.dart';
 import 'dart:convert';
+
+import 'pojo/ListData.dart';
 
 class ChartPage extends StatefulWidget {
   @override

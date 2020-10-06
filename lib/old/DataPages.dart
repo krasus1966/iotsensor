@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:iot_sensor/pojo/NewData.dart';
 import 'dart:convert';
+
+import 'pojo/NewData.dart';
 
 class DataPage extends StatefulWidget {
   @override
